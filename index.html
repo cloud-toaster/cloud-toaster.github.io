@@ -1,74 +1,216 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Cloud-toaster.github.io by cloud-toaster</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ToASTER - Testing of Cloud Infrastructure Deployments</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="ToASTER Cloud Testing Tool" />
+        <meta name="keywords" content="ToASTER, Infrastructure as Code, Testing" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style2.css" />
+        <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+	<!-- Top bar -->
+	<div class="forkBanner" style="text-align: right; background: none;">
+		<a href="https://github.com/whummer/toaster">
+			<img src="img/forkGithub.png" style="float: right;"/>
+		</a>
+	</div>
+        <div class="container">
+		<div class="header">
+			<h1>ToASTER</h1>
+			<h2>Testing of Cloud Infrastructure Deployments (Chef/Puppet)</h2>
+		</div>
+                <ul class="ca-menu">
+                    <li>
+                        <a href="#intro">
+                            <span class="ca-icon">e</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Introduction</h2>
+                                <h3 class="ca-sub">ToASTER in a nutshell</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quickstart">
+                            <span class="ca-icon">p</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Quickstart</h2>
+                                <h3 class="ca-sub">Get started in a minute</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#details">
+                            <span class="ca-icon">L</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Details</h2>
+                                <h3 class="ca-sub">Approach and methodology</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#hosting">
+                            <span class="ca-icon">C</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Hosting</h2>
+                                <h3 class="ca-sub">Testing-as-a-Service</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resources">
+                            <span class="ca-icon">K</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Resources</h2>
+                                <h3 class="ca-sub">Links and Publications</h3>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
 
-      <header>
-        <h1>Cloud-toaster.github.io</h1>
-        <p>ToASTER Website</p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/cloud-toaster" class="button fork"><strong>View On GitHub</strong></a>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+		<div class="pages">
+		
+		<div id="quickstart" class="panel">
+			<div class="content">
+				<h1>Quick Start</h1>
+				<p>Installation (as root):</p>
+<pre><code class="hljs bash">gem install cloud-toaster       # (install gem and toaster binary)
+toaster setup                   # (install required software stack)
+toaster proto ubuntu1 ubuntu    # (create Ubuntu prototype container)</code></pre>
+				<p>Setup Testing Host:</p>
+<pre><code class="hljs bash">toaster web -d                  # (start Web UI) 
+toaster agent                   # (start test agent)
+</code></pre>
+				<p>Run Tests (e.g., Chef recipe tomcat6::default):</p>
+<pre><code class="hljs bash">toaster testinit tomcat6 default ubuntu1 # (initialize test suite)
+                                         # stdout: "Test Suite ID 123abc"
+toaster runtests 123abc                  # (run tests in test suite)
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+				<h1>Notes</h1>
+				<p>
+				<b>Important:</b> Do not use ToASTER on your production machine! We recommend <b>installation on a dedicated 
+				machine</b>, because ToASTER depends on a comprehensive software stack and requires a high amount of system 
+				resources. 
+				</p>
+				<h1>Fetch the Code</h1>
+				<pre><code class="hljs bash">git clone https://github.com/whummer/toaster.git</code></pre>
+				</p>
+			</div>
+		</div>
+		
+		<!-- About -->
+		<div id="details" class="panel">
+			<div class="content">
+				<h1>System Model</h1>
+				<p>
+To briefly introduce the problem domain, we refer to the abstracted system model depicted in 
+Figure 1. The core entity is denoted <b>automation</b>, which represents the logic of a piece of 
+Infrastructure as Code (IaC, see <a href="http://www.ibm.com/developerworks/library/a-devops2/">here</a>
+for a brief overview). 
+An automation consists of multiple <b>automation tasks</b>, 
+which are implemented by some <b>script code</b> and are supposed to cause potential <b>state 
+changes</b>. From the runtime perspective, an <b>automation run</b> represents the entire
+execution of an automation, which itself consists of multiple <b>task executions</b>. Each 
+task execution effects a set of concrete <b>state transisions</b> which are actually 
+measurable in the system by comparing the <b>pre-state</b> before execution with the 
+<b>post-state</b> after execution. Automations and tasks are configured by <b>parameters</b> 
+which steer the execution of the IaC logic at runtime.
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p style="text-align: center"><img src="img/domainModel.png" style="width: 500px;"/><br/>
+Figure 1: Domain Model of IaC Automation Scripts </p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h1>Framework Architecture</h1>
+<p>We briefly discuss the implementation of our distributed testing
+framework. Figure 6 illustrates the architecture from the perspective of a single
+testing host. A Web user interface guides the test execution. Each host runs a test
+manager which materializes tests and creates new containers for each test case. 
+State changes within the containers are monitored using 
+<a href="http://sourceforge.net/projects/strace/">strace</a>.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p style="text-align: center"><img src="img/architecture.png" style="width: 500px;"/><br/>
+Figure 2: Test Framework Architecture</p>
+<p>
+Our framework parallelizes the execution in two dimensions: first, multiple
+testing hosts are started from a pre-configured VM image; second, each testing
+host contains several containers executing test cases in parallel. We utilize the
+highly effcient Linux containers (LXC). Each container has a dedicated root
+directory within the host's file system. We use the notion of prototype
+container templates (denoted 'proto' in Figure 2) to provide a clean environment for each
+test. Each prototype contains a base operating system (Ubuntu 12.04 and Fedora
+16 in our case) and basic services such as a secure shell (SSH) daemon. Instead
+of duplicating the entire filesystem for each container, we use a 
+copy-on-write (C-O-W) filesystem, which allows to spawn new instances within a few
+seconds. To avoid unnecessary re-downloads of external resources (e.g., software
+packages), each host is equipped with a Squid proxy server.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+			</div>
+		</div>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+		<!-- Resources -->
+		<div id="resources" class="panel">
+			<div class="content">
+				<h1>Publications</h1>
+<ul>
+<li><span class="bibauthor"><span class="self">Waldemar Hummer</span>, Florian Rosenberg, Fabio Oliveira, Tamar Eilam</span>.  <a href="http://dsg.tuwien.ac.at/staff/hummer/docs/2013-middleware-iac.pdf"><b>Testing Idempotence for Infrastructure as Code</b></a>, <span class="bibbooktitle">In ACM/IFIP/USENIX Middleware Conference</span>, 2013. (<b>Best Student Paper Award</b>)
+ <a class="biburl" title="Hummer2013b" href="bibtexbrowser.php?key=Hummer2013b&amp;bib=%2Ftmp%2Fmendeley.library.bib">[bibtex]</a> <a href="http://dsg.tuwien.ac.at/staff/hummer/docs/2013-middleware-iac.pdf">[pdf]</a></li>
+<li><span class="bibauthor"><span class="self">Waldemar Hummer</span>, Florian Rosenberg, Fabio Oliveira, Tamar Eilam</span>.  <a href="http://dsg.tuwien.ac.at/staff/hummer/docs/2013-middleware-chefTest.pdf"><b>Automated Testing of Chef Automation Scripts</b></a>, <span class="bibbooktitle">In ACM/IFIP/USENIX Middleware Conference (demo track)</span>, 2013. <a class="biburl" title="Hummer2013c" href="bibtexbrowser.php?key=Hummer2013c&amp;bib=%2Ftmp%2Fmendeley.library.bib">[bibtex]</a> <a href="http://dsg.tuwien.ac.at/staff/hummer/docs/2013-middleware-chefTest.pdf">[pdf]</a></li>
+</ul>
+				<h1>Evaluation Results</h1>
+				<p>We have performed extensive testing of roughly 300 publicly available Chef scripts from the OpsCode community. 
+				The results of the evaluation are available here:</p>
+				<p><a href="http://dsg.tuwien.ac.at/testIaC/">http://dsg.tuwien.ac.at/testIaC/</a></p>
+				<h1>Presentations</h1>
+				<p>Talk held at <a href="http://2013.middleware-conference.org/">ACM/IFIP/USENIX Middleware'13 conference</a>, 
+				and also presented at a 
+				<a href="http://www.meetup.com/Vienna-DevOps-Security/events/163736662/">Vienna DevOps&Security Meetup</a>:</p>
+				<p><a href="http://dsg.tuwien.ac.at/staff/hummer/slides/toaster/">http://dsg.tuwien.ac.at/staff/hummer/slides/toaster/</a>
+				</p>
+				<h1>Awards</h1>
+				<ul><li><b>Best Student Paper Award</b> at 
+				<a href="http://2013.middleware-conference.org/">ACM/IFIP/USENIX Middleware'13 conference</a>, 					for the research paper which introduces the methodological approach underlying ToASTER.
+				</li></ul>
+			</div>
+		</div>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+		<!-- Hosting -->
+		<div id="hosting" class="panel">
+			<div class="content">
+				<h1>Hosting</h1>
+				<p><b>ToASTER will soon be provided as a convenient and easy-to-use service. Stay tuned!</b></p>
+				<p></p>
+			</div>
+		</div>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
+		<!-- Home -->
+		<div id="intro" class="content">
+			<p style="text-align: center; font-size: 25px;">&laquo; Give us your Chef scripts -<br/> we shall test them for you. &raquo;</p>
+			<h1>The Context</h1>
+			<ul><li>Cloud Computing fosters development of <b>elastically scaling applications</b>.</li>
+			<li>Elastic applications require frequent <b>deployment and configuration</b> of resources (e.g., virtual machines).</li> 				<li><b>Infrastructure as Code</b> (IaC) tools - such as <a href="http://www.getchef.com/"><b>Chef</b></a> or 
+			<a href="http://puppetlabs.com/"><b>Puppet</b></a> - support systematic configuration management.</li></ul>
+			<h1>The Problem</h1>
+			<ul><li>Cloud applications often <b>blindly assume</b> that infrastructure resource deployment is 
+			<b>reliable</b> and <b>repeatable</b>.</li>
+			<li>Hence, it is imperative that IaC scripts reliably make the <b>system converge to the desired state</b>.</li>
+			<li>However, developing robust automations is non-trivial, therefore IaC scripts must be <b>thoroughly tested</b>.</li></ul>
+			<h1>The Solution</h1>
+			<ul><li>To test the IaC scripts different configurations, the framework <b>generates a multitude of test cases</b>.</li>
+			<li>The tests perturb, terminate, and repeatedly run the execution, <b>simulating real-life fault situations</b>.</li>
+			<li>Tests runs in an <b>isolated environment</b> (Docker containers), where all <b>state 
+			changes</b> are recorded and analyzed.</li></ul>
+		</div>
+		
+		</div>
+		<div class="footer" style="visibility: hidden">
+		<img src="http://web4d.ftp.sh/util/counter.php?font_size=3&url=http://cloud-toaster.github.io" 
+			style="margin-bottom: -5px;"/>hits since 07/2014.
+		</div>
+        </div>
+    </body>
 </html>
